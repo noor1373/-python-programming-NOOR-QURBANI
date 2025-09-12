@@ -45,7 +45,7 @@ y2 = 1
 # Räkna lutningen
 k = (y2 - y1) / (x2  - x1)
 m = y1 - k * x1
-print(f"Lingens ekvation är: y = {k}x + {m}.")
+print(f"Linjens ekvation är: y = {k}x + {m}.")
 
 
 # 5. Avstånd mellan två punkter i 2D
