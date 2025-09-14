@@ -41,3 +41,34 @@ else:
 
 
 # 4. Medicine
+age = int(input("Ange ålder i år. "))
+weight = float(input("Ange vikt i kg. "))
+
+# Kontrollera vikt och visa rekommenderad tabllet intag.
+if weight > 40:
+    print("Rekommenderad dos: 1 - 2 tabletter. ")
+elif 26 <= weight <= 40:
+    print("Rekommenderad dos: 1/2 - 1 tablett. ")
+elif 15 <= weight <= 25:
+    print("Rekommenderad dos: 1/2 tablett. ")
+else:
+    print("Ej rekommenderad dos.")
+
+# 5. Divisible
+tal = int(input("Ange ett heltal: "))
+
+# Kontrollera om talen är jämnt eller udda
+if tal % 2 == 0:
+    print("Talet är jämnt. ")
+else:
+    print("Talet är udda. ")
+
+# Kontrollera om talet är delar med 5
+if tal % 5 == 0:
+    print("Talet är delbar med 5. ")
+else:
+    print("Talet är inte delbar med 5. ")
+
+# Kontrollera om talet är delbar med 5 och udda.
+if tal % 5 == 0 and tal % 2 != 0:
+    print("Talet är både delabar med 5 och udda. ")
