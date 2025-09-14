@@ -72,3 +72,14 @@ else:
 # Kontrollera om talet är delbar med 5 och udda.
 if tal % 5 == 0 and tal % 2 != 0:
     print("Talet är både delabar med 5 och udda. ")
+
+# 6. Luggage size
+# Kontrollera mått och vikt på väskan
+weight = float(input("Ange vikt på handbagagen i kg. "))
+length = float(input("Ange längd i cm: "))
+width = float(input("Ange bredd i cm: "))
+height = float(input("Ange höjd i cm: "))
+if weight <= 8 and length <= 55 and width <= 40 and height <= 23:
+    print("Väskan är godkänd som handbagage. ")
+else:
+    print("Väskan är för stor eller för tung. ")
