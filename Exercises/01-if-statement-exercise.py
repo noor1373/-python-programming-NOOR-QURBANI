@@ -83,3 +83,10 @@ if weight <= 8 and length <= 55 and width <= 40 and height <= 23:
     print("Väskan är godkänd som handbagage. ")
 else:
     print("Väskan är för stor eller för tung. ")
+
+name = input("Vad heter du? ")
+while name == "":
+    print("Du har inte anget ditt namn. ")
+    name = input("Vad heter du? ")
+
+print(f"Hej {name} ")
