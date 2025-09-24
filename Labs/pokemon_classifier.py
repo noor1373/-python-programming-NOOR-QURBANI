@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
 import math
 
 pichu_length, pichu_width = [], []
@@ -17,10 +16,8 @@ try:
             parts = clear_line.split(", ")
 
             if len(parts) == 3:    
-                length = float(parts[0])
-                width = float(parts[1])
-                pokemon_type = int(parts[2])
-
+                length, width, pokemon_type = float(parts[0]), float(parts[1]), int(parts[2])
+                
                 if pokemon_type == 0: # 0 means Pichu
                     pichu_length.append(length)
                     pichu_width.append(width)
@@ -32,7 +29,7 @@ except:
 
 
 # https://www.w3schools.com/python/matplotlib_labels.asp
-# plots a scatter graph of Pichu and Pikachu
+# plots a scatter graph of Pichu and Pikachu (data points)
 plt.scatter(pichu_length, pichu_width, color="blue", label="Pichu")
 plt.scatter(pikachu_length, pikachu_width, color="red", label="Pikachu")
 plt.xlabel("Length")
@@ -42,15 +39,12 @@ plt.legend()
 plt.show()
 
 test_points = []
-first_line = True
 
 try:
     with open ("testpoints.txt", "r") as file:
+        lines = file.readlines()
+        for line in lines[1:]: # Skip first line
 
-        for line in file:
-            if first_line:
-                first_line = False
-                continue
             # Remove numbering and parentheses
             if line.strip():
                 clear_line = line.split(". ", 1)[-1].strip()
@@ -68,10 +62,10 @@ def calculate_distance(length1, width1, length2, width2):
     return math.sqrt((length2 - length1)**2 + (width2 - width1)**2)
 
 
-def classify_points(test_length, test_width):
+def classify_point(test_length, test_width):
     """Classify a point as Pichu or Pikachu based on nearest neighbor"""
     min_distance = float("inf") # start with a very large number
-    closest_pokemon = "Unkown"
+    closest_pokemon = "Unknown"
 
     # Check all Pichu and Pikachu points
     for i in range(len(pichu_length)):
@@ -90,10 +84,40 @@ def classify_points(test_length, test_width):
 
     return closest_pokemon
 
+# Classify test points
+print("\n--- Classification Results ---")
+classifications = []
+for point in test_points:
+    length, width = point
+    classification = classify_point(length, width)
+    classifications.append(classification)
+    print(f"Point ({length}, {width}) classified as {classification}")
 
+# plots a scatter graph of Pichu and Pikachu (test points & data points)
+# plot datapoints
+plt.scatter(pichu_length, pichu_width, color="blue", label="Pichu (training)")
+plt.scatter(pikachu_length, pikachu_width, color="red", label="Pikachu (training)")
 
-    
+# plot test points
+for i, point in enumerate(test_points):
+    length, width = point
+    color = "green" if classifications[i] == "Pichu" else "orange"
+    marker = "X" if classifications[i] == "Pichu" else "*" # * for Pikachu
 
+    plt.scatter(length, width, color=color, marker=marker, edgecolors="black", s=100)
+
+plt.scatter([], [], color="green", marker="X", s=100, label="Test Pichu", edgecolors="black")
+plt.scatter([], [], color="orange", marker="*", s=100, label="Test Pikachu", edgecolors="black")
+plt.xlabel("Length (cm)")
+plt.ylabel("Width (cm)")
+plt.title("Pichu vs Pikachu - Classification Results")
+plt.legend()
+plt.show()
+
+print("\n--- Clasification Summary ---")
+for i, point in enumerate(test_points, 1):
+    length, width = point
+    print(f"Test point {i}: ({length}, {width}) -> {classifications[i-1]}")
 
     
 
